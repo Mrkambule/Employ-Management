@@ -1,0 +1,101 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+
+.create-task-section {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+#create-task-form {
+  width: 60%;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+}
+
+.alert {
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.alert.success {
+  color: #4CAF50;
+  background-color: #DFF2BF;
+  border-color: #4CAF50;
+}
+
+.alert.error {
+  color: #F44336;
+  background-color: #FFBABA;
+  border-color: #F44336;
+}
+
+button {
+  padding: 10px 15px;
+  background-color: #00FFF5;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #00C7C7;
+}
+
+label {
+  display: block;
+  margin-top: 10px;
+}
+
+input, textarea, select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid #ddd;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+#task-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: flex-start;
+}
+
+.task-form {
+  flex: 1 1 calc(33.333% - 40px);
+  margin: 10px;
+  box-sizing: border-box;
+}
+
+.task-card {
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+}

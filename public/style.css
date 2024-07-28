@@ -1,0 +1,250 @@
+/* Global Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: rgba(61, 54, 54, 0.7); /* Assuming this is a placeholder, adjust as needed */
+    background-size: cover;
+    color: #FFFFFF;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Header and Navigation */
+header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 30px 40px; /* Increased padding for larger header */
+    background: #ff00ff; /* Background color of the header */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    transition: background 0.3s ease;
+}
+
+header:hover {
+    background: rgba(255, 255, 255, 0.1); /* Background color on hover */
+}
+
+/* Apply hover effect to the text inside the header */
+header:hover .nav-list-desktop a {
+    color: #ff00ff; /* Change text color to match header background */
+    transform: scale(1.2); /* Zoom effect */
+    font-weight: bold; /* Make text bold on hover */
+    font-size: 22px; /* Increase font size on hover */
+}
+
+.nav-list-desktop {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.nav-list-desktop li {
+    margin-left: 25px;
+}
+
+.nav-list-desktop a {
+    color: #FFFFFF; /* Initial text color */
+    text-decoration: none;
+    font-size: 18px;
+    transition: color 0.3s ease, transform 0.3s ease, font-size 0.3s ease;
+}
+
+.nav-list-desktop a:hover {
+    color: #ff00ff; /* Matches the provided color scheme */
+    transform: scale(1.2); /* Zoom effect */
+    font-weight: bold; /* Make text bold on hover */
+    font-size: 22px; /* Increase font size on hover */
+}
+
+/* Mobile Menu Icon */
+.menu-icon {
+    display: none;
+    background: none;
+    border: none;
+    color: #FFFFFF; /* Initial icon color */
+    font-size: 30px;
+    cursor: pointer;
+    transition: color 0.3s ease; /* Smooth transition for color change */
+}
+
+/* Change color of menu icon on hover */
+.menu-icon:hover {
+    color: #ff00ff; /* Pink color on hover */
+}
+
+/* Mobile Menu Container */
+.menu-container {
+    position: relative;
+}
+
+.nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: none;
+    flex-direction: column;
+    background: rgba(0, 0, 0, 0.9);
+    color: #FFFFFF;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    padding-top: 60px;
+}
+
+.nav-list.show {
+    display: flex;
+}
+
+.nav-list li {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.nav-list li:last-child {
+    border-bottom: none;
+}
+
+.nav-list a {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 20px;
+    display: block;
+    padding: 10px 0;
+    transition: background 0.3s, color 0.3s, font-weight 0.3s;
+}
+
+/* Zoom and bold effect on hover */
+.nav-list a:hover {
+    background: rgba(0, 255, 255, 0.2);
+    color: #ff00ff; /* Change text color on hover */
+    font-weight: bold; /* Make text bold on hover */
+}
+
+/* Close button */
+#close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: #FFFFFF;
+    font-size: 30px;
+    cursor: pointer;
+    padding: 10px;
+    background: rgba(255, 0, 0, 0.7);
+    border-radius: 50%;
+}
+
+/* Hero Section */
+.hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 60px); /* Adjust height to account for header */
+    background: rgba(0, 0, 0, 0.6);
+    text-align: center;
+    padding: 20px;
+    margin-top: 120px; /* Add space at the top */
+}
+
+.hero-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+    margin-top: 60px; /* Add space at the top */
+}
+
+.hero-image {
+    position: relative;
+    max-width: 100%;
+    height: auto;
+    backdrop-filter: blur(15px);
+    background: rgba(255, 255, 255, 0.1); /* Matches the modal background color */
+    border-radius: 10px;
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+    padding: 20px;
+    border: 4px solid;
+    border-image-slice: 1;
+    border-image-source: linear-gradient(270deg, #ff00ff, #00ffff); /* Matches the border gradient */
+}
+
+.hero-content {
+    color: #FFFFFF;
+    max-width: 600px;
+    position: relative;
+    z-index: 1;
+}
+
+.hero-content h2 {
+    font-size: 4em;
+    margin-bottom: 20px;
+    color: #ff00ff; /* Matches the provided color scheme */
+}
+
+.hero-content p {
+    font-size: 1.5em;
+}
+
+/* Button Style */
+.create-account-btn {
+    background: linear-gradient(270deg, #ff00ff, #00ffff); /* Matches the provided gradient */
+    color: #FFFFFF;
+    border: none;
+    padding: 15px 30px;
+    cursor: pointer;
+    border-radius: 10px;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+    text-transform: uppercase;
+    margin-top: 20px;
+}
+
+.create-account-btn a {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.create-account-btn:hover {
+    background: linear-gradient(270deg, #00ffff, #ff00ff); /* Matches the provided gradient */
+}
+
+/* Responsive Design */
+@media only screen and (max-width: 850px) {
+    .nav-list-desktop {
+        display: none;
+    }
+
+    .menu-icon {
+        display: block;
+    }
+}
+
+@media only screen and (max-width: 550px) {
+    .hero-content h2 {
+        font-size: 2.5em;
+    }
+
+    .hero-content p {
+        font-size: 1.2em;
+    }
+
+    .hero-image img {
+        width: 100%;
+        height: auto;
+    }
+}

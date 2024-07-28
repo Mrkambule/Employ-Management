@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Animations */
+        @keyframes borderAnimation {
+            0% {
+                border-color: #7f00ff;
+            }
+            50% {
+                border-color: #e100ff;
+            }
+            100% {
+                border-color: #7f00ff;
+            }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* General Styles */
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+            background: url('m.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        .nav-list {
+            width: 250px;
+            background-color: rgba(0, 51, 102, 0.8);
+            color: #FFFFFF;
+            padding: 20px;
+            position: fixed;
+            height: 100%;
+            overflow: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.3s ease-in-out;
+            border-right: 2px solid #e100ff;
+            border-image-slice: 1;
+            border-image-source: linear-gradient(270deg, #7f00ff, #e100ff);
+            animation: borderAnimation 5s linear infinite;
+        }
+
+        .nav-list a {
+            color: #FFFFFF;
+            padding: 10px 15px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            border-radius: 10px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .nav-list a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #e100ff;
+        }
+
+        .nav-list i {
+            margin-right: 10px;
+            color: #e100ff;
+        }
+
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+            flex-grow: 1;
+            background-color: rgba(240, 240, 240, 0.9);
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .create-task {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .create-task button {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #e100ff;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            padding: 15px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .create-task button:hover {
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .card-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            color: #003366;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: 30%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .modal {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        .modal-content {
+            backdrop-filter: blur(15px);
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            position: relative;
+            border: 4px solid #e100ff;
+            width: 400px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+            animation: borderAnimation 5s linear infinite;
+        }
+
+        .close {
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #e100ff;
+            background-color: #FFFFFF;
+            border: 2px solid #e100ff;
+            border-radius: 50%;
+            padding: 5px 10px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #7f00ff;
+            background-color: rgba(224, 255, 255, 0.5);
+            color: #003366;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group input::placeholder, .form-group textarea::placeholder {
+            color: #003366;
+        }
+
+        button {
+            background: linear-gradient(270deg, #7f00ff, #e100ff);
+            color: #FFFFFF;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background: linear-gradient(270deg, #e100ff, #7f00ff);
+        }
+
+        .alert {
+            background-color: rgba(224, 51, 102, 0.8);
+            border: 2px solid #FFFFFF;
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFFFFF;
+            font-size: 16px;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #e100ff;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            animation: spin 1s linear infinite;
+        }
+
+        .menu-icon {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 24px;
+            color: #003366;
+            cursor: pointer;
+            display: none;
+            z-index: 1000;
+            transition: transform 0.3s;
+        }
+
+        .menu-icon:hover {
+            transform: rotate(90deg);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-list {
+                width: 100%;
+                height: 100%;
+                transform: translateX(-100%);
+                border: none;
+                box-shadow: none;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .menu-icon {
+                display: block;
+            }
+
+            .nav-list.show {
+                transform: translateX(0);
+            }
+
+            .card-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .card {
+                width: 80%;
+                margin-bottom: 20px;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .nav-list #close-btn {
+                display: none;
+            }
+
+            .card-container .card:not(:last-child) {
+                margin-right: 20px;
+            }
+        }
+    </style>
+
+</head>
+<body>
+    <div class="menu-icon"><i class="fas fa-bars"></i></div>
+    <div class="nav-list">
+        <ul>
+            <li><a href="#messages"><i class="fas fa-envelope"></i> Messages</a></li>
+            <li><a href="#register-employees" id="register-employees-link"><i class="fas fa-user-plus"></i> Register Employees</a></li>
+            <li><a href="#tasks"><i class="fas fa-tasks"></i> Tasks</a></li>
+            <li><a href="#employees"><i class="fas fa-users"></i> List of Employees</a></li>
+            <li><a href="#calendar"><i class="fas fa-calendar-alt"></i> Calendar</a></li>
+            <li><a href="#register"><i class="fas fa-user-cog"></i> Register</a></li>
+            <li><a href="/"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            <li id="close-btn"><a href="#"><i class="fas fa-times"></i> Close</a></li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <div class="card-container">
+            <div class="card" id="completed-tasks">
+                <h3>Completed Tasks</h3>
+                <p>5</p>
+            </div>
+            <div class="card" id="tasks-in-progress">
+                <h3>Tasks in Progress</h3>
+                <p>3</p>
+            </div>
+            <div class="card" id="number-of-tasks">
+                <h3>Number of Tasks</h3>
+                <p>8</p>
+            </div>
+        </div>
+
+        <div class="create-task">
+            <button id="create-task-btn"><i class="fas fa-plus"></i></button>
+            <p>Click here to create a task</p>
+        </div>
+
+        <div class="modal" id="create-task-modal">
+            <div class="modal-content">
+                <span class="close" id="close-create-task-modal">&times;</span>
+                <div id="create-task-alert" class="alert" style="display: none;"></div>
+                <form id="create-task-form">
+                    <div class="form-group">
+                        <input type="text" name="task_title" placeholder="Task Title" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea name="task_description" placeholder="Task Description" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <input type="date" name="deadline_date" placeholder="Deadline Date" required>
+                    </div>
+                    <button type="submit">Create Task</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const menuIcon = document.querySelector('.menu-icon');
+            const navList = document.querySelector('.nav-list');
+            const closeBtn = document.querySelector('#close-btn');
+            const createTaskBtn = document.querySelector('#create-task-btn');
+            const createTaskModal = document.querySelector('#create-task-modal');
+            const closeCreateTaskModal = document.querySelector('#close-create-task-modal');
+            const createTaskForm = document.querySelector('#create-task-form');
+            const createTaskAlert = document.querySelector('#create-task-alert');
+
+            menuIcon.addEventListener('click', () => {
+                navList.classList.toggle('show');
+            });
+
+            closeBtn.addEventListener('click', () => {
+                navList.classList.remove('show');
+            });
+
+            createTaskBtn.addEventListener('click', () => {
+                createTaskModal.style.display = 'flex';
+            });
+
+            closeCreateTaskModal.addEventListener('click', () => {
+                createTaskModal.style.display = 'none';
+            });
+
+            window.addEventListener('click', (e) => {
+                if (e.target === createTaskModal) {
+                    createTaskModal.style.display = 'none';
+                }
+            });
+
+            createTaskForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const formData = new FormData(createTaskForm);
+                const response = await fetch('/create-task', {
+                    method: 'POST',
+                    body: formData
+                });
+                const result = await response.json();
+                if (result.success) {
+                    createTaskAlert.innerHTML = `<span class="spinner"></span> Task created successfully!`;
+                    createTaskAlert.style.display = 'flex';
+                    setTimeout(() => {
+                        window.location.reload(); // Replace with your desired success action
+                    }, 2000);
+                } else {
+                    createTaskAlert.innerHTML = `<span class="spinner"></span> Task creation failed. Please try again.`;
+                    createTaskAlert.style.display = 'flex';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WorkWise Home</title>
+    <link rel="stylesheet" href="/style.css">
+ <style>
+        /* General styles */
+        
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+.shake {
+    animation: shake 0.5s;
+    animation-iteration-count: 1;
+}
+
+      
+
+     
+
+        /* Task container styles */
+       .tasks-container {
+
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+
+       .tasks-container h2 {
+            color: #333;
+        }
+
+       .tasks-container ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+       .tasks-container li {
+            border-bottom: 1px solid #eee;
+            padding: 10px 0;
+        }
+
+       .tasks-container li strong {
+            display: inline-block;
+            background-color: #00fff5;
+            color: black;
+            padding: 5px 10px;
+            margin-right: 10px;
+            margin-left: 10px;
+            border-radius: 5px;
+        }
+
+        /* Message container styles */
+       .message-container {
+            background-color: #e0e0e0;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+       .message-container p {
+            margin: 0;
+        }
+        .task-message-form {
+    background-color: 222;
+    color: white; /* Ensures text is readable against the black background */
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 800px;
+    margin: auto;
+}
+.status-container {
+    display: inline-block;
+    background-color: #ffcccc; /* Light red background */
+    color: #c0392b; /* Darker red text */
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-left: 10px;
+    font-size: 12px; /* Smaller font size */
+}
+
+.status-text {
+    /* No need to redefine if it's only used within.status-container */
+}
+  /* Your existing styles */
+        .alert {
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .alert.success {
+            background-color: #4CAF50; /* Green */
+            color: white;
+        }
+        .alert.error {
+            background-color: #f44336; /* Red */
+            color: white;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25%, 75% { transform: translateX(-10px); }
+            50% { transform: translateX(10px); }
+        }
+        .shake {
+            animation: shake 0.5s;
+        }
+
+/* Existing CSS for tasks-container, message-container, etc. remains unchanged */
+
+    </style>
+</head>
+<body>
+              <h3>Welcome, {{user.name}}!</h3>
+     
+     <div class="menu-container">
+        <button id="menu-btn">Menu</button>
+        <ul id="nav-list" class="nav-list">
+          
+        
+            <li><a href='/admin-login'>Send Message</a></li>
+              <li><a href='/logout'>Logout</a></li>
+            <li id="close-btn"><a href="#">Close</a></li>
+        </ul>
+    </div>
+
+
+    <section>
+    
+ <form action="#" method="post" class="task-message-form">
+    
+    {{#if tasks.length}}
+        {{#each tasks}}
+            <div class="task-item">
+                <strong>{{title}}</strong>: {{description}}
+                <button class="accept-button">Accept</button>
+                <button class="done-button">Done</button>
+                <span class="status-container"><span class="status-text">Not Accepted</span></span>
+            </div>
+        {{/each}}
+    {{else}}
+        <p>No tasks for you yet.</p>
+    {{/if}}
+
+</form>
+</section>
+
+
+    
+
+    <script>
+    
+
+    document.addEventListener("DOMContentLoaded", () => {
+    const menuBtn = document.getElementById("menu-btn");
+    const navList = document.getElementById("nav-list");
+    const closeBtn = document.getElementById("close-btn");
+
+    menuBtn.addEventListener("click", () => {
+        navList.classList.toggle("show");
+    });
+
+    closeBtn.addEventListener("click", () => {
+        navList.classList.remove("show");
+    });
+});
+
+
+
+    </script>
+
+   
+    
+</body>
+</html>
